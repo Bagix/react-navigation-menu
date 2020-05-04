@@ -1,4 +1,5 @@
 import React from 'react';
+import './Item.css';
 
 const item = (props) => {
 
@@ -9,7 +10,7 @@ const item = (props) => {
   }
 
   return(
-    <li className={active ? "active": ''} onClick={props.click}>
+    <li className={`item ${active ? "active": ''}`} onClick={props.click}>
       {props.name}
     </li>
   )

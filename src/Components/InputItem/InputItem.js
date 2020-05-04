@@ -1,10 +1,11 @@
 import React from 'react';
+import './InputItem.css';
 
 const inputItems = (props) => {
   return(
-    <div>
+    <div className="search-input">
       <input type="text" onChange={props.change} value={props.newItemName}/>
-      <button type="button" onClick={props.save}>Save</button>
+      <button type="button" onClick={props.save} disabled={props.buttonDisabled} title="At least 3 letters">Save</button>
     </div>
   )
 }

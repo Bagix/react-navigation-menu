@@ -1,0 +1,29 @@
+.search-input input {
+  border-radius: 3px;
+  padding: .5rem;
+  font-size: 1rem;
+  box-shadow: 0 0 2px 2px var(--purple);
+  border: none;
+}
+
+.search-input button {
+  margin-left: 1rem;
+  padding: .5rem 1rem;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--pink);
+  font-size: 1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .2s linear;
+}
+
+.search-input button:hover {
+  background-color: var(--purple);
+}
+
+.search-input button:disabled {
+  background-color: var(--peach);
+  color: #CDCDCD;
+  cursor: default;
+}

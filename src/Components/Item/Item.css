@@ -1,0 +1,13 @@
+.item {
+  padding: 1rem;
+  background-color: var(--pink);
+  color: var(--beige);
+  cursor: pointer;
+  transition: all .175s linear;
+  font-weight: bold;
+}
+
+.item:hover,
+.item.active {
+  background-color: var(--blue);
+}

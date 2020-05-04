@@ -9,6 +9,7 @@ class App extends Component {
   state = {
     newItemName: '',
     activeItem: '',
+    buttonDisabled: true,
     items: [
       {name: 'Postacie'},
       {name: 'Zwierzęta'},
@@ -19,30 +20,36 @@ class App extends Component {
   }
 
   listenNewItemHandler = (event) => {
-    this.setState({newItemName: event.target.value})
-  }
-
-  saveNewItemHandler = () => {
-    if(this.state.newItem !== '') {
-      const newItem = {name: this.state.newItemName};
-      const newItems = [...this.state.items];
-      newItems.push(newItem);
-      this.setState({
-        items: newItems,
-        newItemName: ''
-      })
+    const newItemName = event.target.value;
+    this.setState({ newItemName: newItemName})
+    if(newItemName.trim() !== '' && newItemName.trim().length > 2) {
+      this.setState({buttonDisabled: false})
+    } else {
+      this.setState({buttonDisabled: true})
     }
   }
 
+  saveNewItemHandler = () => {
+    let newItemName = this.state.newItemName.trim();
+    newItemName = newItemName.charAt(0).toUpperCase() + newItemName.slice(1)
+    const newItem = {name: newItemName};
+    const newItems = [...this.state.items];
+    newItems.push(newItem);
+    this.setState({
+      items: newItems,
+      newItemName: '',
+      buttonDisabled: true
+    })
+  }
+
   setActiveItemHandler = (event) => {
-    console.log(event.target.innerHTML);
     this.setState({activeItem: event.target.innerHTML});
   }
 
   render() {
 
     let items = (
-      <ul>
+      <ul className="list">
         {this.state.items.map(item => {
           return(
             <Item 
@@ -53,6 +60,14 @@ class App extends Component {
       </ul>
     )
 
+    let activeItem = null;
+
+    if(this.state.activeItem !== '') {
+      activeItem = <p>Selected item: <span>{this.state.activeItem}</span></p>
+    }
+
+
+
     return (
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
@@ -60,7 +75,9 @@ class App extends Component {
           <InputItem
             change={(event) => this.listenNewItemHandler(event)}
             save={this.saveNewItemHandler}
-            newItemName={this.state.newItemName} />
+            newItemName={this.state.newItemName}
+            buttonDisabled={this.state.buttonDisabled}/>
+          {activeItem}
           {items}
         </div>
       </div>
